@@ -24,13 +24,13 @@
             class="glide__arrow glide__arrow--left bg-white/80 backdrop-blur-sm p-1 rounded-full"
             data-glide-dir="<"
           >
-            <ChevronLeft class="w-4 h-4" />
+            <ChevronLeft class="w-6 h-6 sm:w-4 sm:h-4" />
           </button>
           <button
             class="glide__arrow glide__arrow--right bg-white/80 backdrop-blur-sm p-1 rounded-full"
             data-glide-dir=">"
           >
-            <ChevronRight class="w-4 h-4" />
+            <ChevronRight class="w-6 h-6 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>
