@@ -59,7 +59,7 @@ var glide;
 function initGlide() {
   if (process.client) {
     glide = new Glide("#glide", {
-      type: "carousel",
+      type: "slider",
       startAt: 0,
     //   autoplay: 4000,
       hoverpause:true,
