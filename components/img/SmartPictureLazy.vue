@@ -41,11 +41,20 @@ import { useElementVisibility } from "@vueuse/core";
 // ---------------
 const props = defineProps({
   // image alternative text
-  alt: String,
+  alt: {
+    type: String,
+    default: () => "",
+  },
   // source
-  src: String,
+  src: {
+    type: String,
+    default: () => "",
+  },
   // img classes
-  imgClasses: String,
+  imgClasses: {
+    type: String,
+    default: () => "",
+  },
 });
 
 // -----------------------------
@@ -97,8 +106,9 @@ const targetIsVisible = useElementVisibility(target);
 
 // handle first visible time
 const unWatchVisibility = watch(targetIsVisible, (newV, oldV) => {
+  console.log('targetVisibility: ',newV)
   // clean this watcher
-  unWatchVisibility();
+  // unWatchVisibility();
 
   // trigger load
   if (newV) {

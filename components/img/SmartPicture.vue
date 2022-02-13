@@ -5,13 +5,13 @@
       :alt="alt"
       :src="src"
       :imgAttrs="{
-        class: imgClasses.concat(
-          ' absolute inset-0 h-full w-full object-cover '
-        ),
+        class: imgClasses
+          .concat(' absolute inset-0 h-full w-full object-cover ')
+          .concat(),
       }"
       @load.capture="onHQILoad()"
       @error.capture="onHQILoadError()"
-      v-if="HQINeeded"
+      v-show="!LQINeeded"
     />
 
     <!-- low quality image -->
@@ -50,6 +50,8 @@ const props = defineProps({
 
 var LQINeeded = ref(true);
 var HQINeeded = ref(false);
+var HQILoaded = ref(false);
+
 
 // ---------------
 // Handlings
@@ -67,13 +69,14 @@ function onLQILoadError() {
 // Hig Quality
 function loadHQI() {
   HQINeeded.value = true;
+  HQILoaded.value = true;
 }
 
 function onHQILoad() {
   handleChange();
 }
 
-function onHQILoadError() { }
+function onHQILoadError() {}
 
 // Change
 function handleChange() {

@@ -1,7 +1,6 @@
 <template>
   <div class="w-full min-h-screen bg-slate-100">
     <div class="w-full">
-
       <Carrousel />
     </div>
   </div>
