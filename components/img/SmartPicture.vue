@@ -37,9 +37,15 @@ const props = defineProps({
   // image alternative text
   alt: String,
   // source
-  src: String,
+  src: {
+    type: String,
+    default: () => "",
+  },
   // img classes
-  imgClasses: String,
+  imgClasses: {
+    type: String,
+    default: () => "",
+  },
 });
 
 var LQINeeded = ref(true);
@@ -67,8 +73,7 @@ function onHQILoad() {
   handleChange();
 }
 
-function onHQILoadError() {
-}
+function onHQILoadError() {}
 
 // Change
 function handleChange() {
