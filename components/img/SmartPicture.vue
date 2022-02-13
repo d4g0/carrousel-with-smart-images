@@ -4,7 +4,6 @@
     <nuxt-picture
       :alt="alt"
       :src="src"
-      quality="100"
       :imgAttrs="{
         class: imgClasses.concat(
           ' absolute inset-0 h-full w-full object-cover '
