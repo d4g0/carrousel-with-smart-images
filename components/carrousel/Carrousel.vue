@@ -9,13 +9,19 @@
             <li
               class="glide__slide h-full flex items-center justify-center"
               v-for="(src, index) in pics"
-              key="index"
+              :key="index"
             >
               <SmartPicture :src="src" />
             </li>
+            <!-- <li class="glide__slide h-full flex items-center justify-center">
+              <SmartPicture :src="pics[0]" />
+            </li>
+            <li class="glide__slide h-full flex items-center justify-center">
+              <SmartPicture :src="pics[1]" />
+            </li> -->
           </ul>
         </div>
-
+        <!-- controls -->
         <div
           data-glide-el="controls"
           class="glide__arrows absolute top-1/2 left-0 w-full flex items-center justify-between px-5 md:px-8 lg:px-20"
@@ -59,18 +65,18 @@ var glide;
 function initGlide() {
   if (process.client) {
     glide = new Glide("#glide", {
-      type: "slider",
+      type: "slider", // carousel || slider
       startAt: 0,
-    //   autoplay: 4000,
-      hoverpause:true,
-      keyboard:true,
+      //   autoplay: 4000,
+      hoverpause: true,
+      keyboard: true,
     }).mount();
   }
 }
 
-function disposeGlide(){
-    // TODO complete
-    // call on unmounted
+function disposeGlide() {
+  // TODO complete
+  // call on unmounted
 }
 
 onMounted(initGlide);

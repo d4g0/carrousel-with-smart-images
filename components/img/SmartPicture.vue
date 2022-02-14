@@ -1,18 +1,20 @@
 <template>
   <div class="w-full h-full relative overflow-hidden">
     <!-- High quality image -->
-    <nuxt-picture
-      :alt="alt"
-      :src="src"
-      :imgAttrs="{
-        class: imgClasses
-          .concat(' absolute inset-0 h-full w-full object-cover ')
-          .concat(),
-      }"
-      @load.capture="onHQILoad()"
-      @error.capture="onHQILoadError()"
-      v-show="!LQINeeded"
-    />
+    <div v-if="HQINeeded">
+      <nuxt-picture
+        :alt="alt"
+        :src="src"
+        :imgAttrs="{
+          class: imgClasses.concat(
+            ' absolute inset-0 h-full w-full object-cover '
+          ),
+        }"
+        @load.capture="onHQILoad()"
+        @error.capture="onHQILoadError()"
+        v-show="showHQImage"
+      />
+    </div>
 
     <!-- low quality image -->
     <nuxt-picture
@@ -32,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref } from "@nuxtjs/composition-api";
+import { ref, onMounted, onUnmounted, computed } from "@nuxtjs/composition-api";
 const props = defineProps({
   // image alternative text
   alt: String,
@@ -48,8 +50,11 @@ const props = defineProps({
   },
 });
 
-var LQINeeded = ref(true);
+var LQINeeded = ref(false);
 var HQINeeded = ref(false);
+var showHQImage = ref(false);
+
+
 
 
 // ---------------
@@ -79,5 +84,25 @@ function onHQILoadError() {}
 // Change
 function handleChange() {
   LQINeeded.value = false;
+  showHQImage.value = true;
 }
+
+// ---------------
+// Life Cicle
+// ---------------
+
+onMounted(() => {
+  if (!process.client) return;
+  console.log(
+    // `(smart-image) [mounted] | ${props.src.split("/")[3].split(".")[0]}`
+  );
+  LQINeeded.value = true;
+});
+
+onUnmounted(() => {
+  if (!process.client) return;
+  console.log(
+    // `(smart-image) [un-mounted] | ${props.src.split("/")[3].split(".")[0]}`
+  );
+});
 </script>
